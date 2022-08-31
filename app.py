@@ -9,8 +9,8 @@
 # from config import Config
 # from models import Review, Book
 # from setup_db import db
-# from views.books import book_ns
-# from views.reviews import review_ns
+# from views_movie.books import book_ns
+# from views_movie.reviews import review_ns
 #
 # функция создания основного объекта app
 # def create_app(config_object):
@@ -46,4 +46,54 @@
 #     app.run(host="localhost", port=10001, debug=True)
 
 
+from flask import Flask
+from flask_restx import Api
+
+
+from views_movie.dao.model.movie import Movie
+
+
+from setup_db import db
+from constants import *
+from config import Config
+from views_movie.movies import movie_ns
+from views_movie.genres import genre_ns
+from views_movie.directors import director_ns
+
+
+def create_app(config):
+    app = Flask(__name__)
+    app.config.from_object(config)
+    app.app_context().push()
+    return app
+
+
+def configure_app(application):
+    db.init_app(application)
+    api = Api(application)
+    api.add_namespace(movie_ns)
+    api.add_namespace(genre_ns)
+    api.add_namespace(director_ns)
+
+
+def create_data():
+    db.drop_all()
+    db.create_all()
+    a = Movie(title="полет носка",
+              description="3 часа полета, муть страшная",
+              trailer="не знаю что в трейлере",
+              year=2000,
+              rating=10,
+              genre_id=1,
+              director_id=1)
+    db.session.add(a)
+    db.session.commit()
+
+
+if __name__ == "__main__":
+    config = Config()
+    app = create_app(config)
+    configure_app(app)
+    #create_data()
+    app.run()
 
