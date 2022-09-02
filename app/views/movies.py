@@ -21,6 +21,7 @@ from app.dao.model.movie import SchemaMovie
 
 from flask import request
 movie_ns = Namespace('movies')
+add_ns = Namespace("add_in_DB")
 
 schema_movie = SchemaMovie()
 schema_movies = SchemaMovie(many=True)
@@ -68,3 +69,9 @@ class MovieView(Resource):
     def delete(self, mid):
         movie_service.delete(mid)
         return '', 204
+
+@add_ns.route("/")
+class Add_in_DBView(Resource):
+    def get(self):
+        movie_service.add_in_DB()
+        return "", 200

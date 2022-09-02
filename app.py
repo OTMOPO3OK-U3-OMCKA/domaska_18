@@ -56,7 +56,7 @@ from app.dao.model.movie import Movie
 
 from setup_db import db
 from config import Config
-from app.views.movies import movie_ns
+from app.views.movies import movie_ns, add_ns
 from app.views.genres import genre_ns
 from app.views.directors import director_ns
 
@@ -73,23 +73,27 @@ def configure_app(application):
     api = Api(application)
     api.add_namespace(movie_ns)
     api.add_namespace(genre_ns)
+    api.add_namespace(add_ns)
     api.add_namespace(director_ns)
 
 
 def create_data():
+    pass
+    #ниженаписанный код вызывается запросом     http://127.0.0.1:5000/add_in_DB/
     #db.drop_all()
     #db.create_all()
-    b = Genre(name="супер-флай_жанр")
-    c = Director(name="жорик")
-    a = Movie(title="полет носка",
-              description="3 часа полета, муть страшная",
-              trailer="не знаю что в трейлере",
-              year=2000,
-              rating=10,
-              genre=b,
-              director=c)
-    db.session.add_all([b, c, a])
-    db.session.commit()
+    #b = Genre(name="супер-флай_жанр")
+    #c = Director(name="жорик")
+    #a = Movie(title="полет носка",
+    #          description="3 часа полета, муть страшная",
+    #          trailer="не знаю что в трейлере",
+    #          year=2000,
+    #          rating=10,
+    #          genre=b,
+    #          director=c)
+    #db.session.add(a)
+    #db.session.commit()
+    #db.session.close()
 
 
 if __name__ == "__main__":

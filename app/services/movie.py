@@ -28,3 +28,6 @@ class MovieService:
 
     def delete(self, mid):
         return self.dao.delete(mid)
+
+    def add_in_DB(self):
+        return self.dao.add_in_DB()

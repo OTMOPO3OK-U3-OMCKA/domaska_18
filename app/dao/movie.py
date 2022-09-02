@@ -1,3 +1,5 @@
+from app.dao.model.director import Director
+from app.dao.model.genre import Genre
 from app.dao.model.movie import Movie
 
 
@@ -44,4 +46,17 @@ class MovieDAO:
     def delete(self, mid):
         movie = self.get_one(mid)
         self.session.delete(movie)
+        self.session.commit()
+
+    def add_in_DB(self):
+        b = Genre(name="супер-флай_жанр")
+        c = Director(name="жорик")
+        a = Movie(title="полет носка",
+                  description="3 часа полета, муть страшная",
+                  trailer="не знаю что в трейлере",
+                  year=2000,
+                  rating=10,
+                  genre=b,
+                  director=c)
+        self.session.add(a)
         self.session.commit()
