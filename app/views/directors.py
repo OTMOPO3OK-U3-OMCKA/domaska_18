@@ -1,4 +1,4 @@
-from views_movie.dao.model.director import SchemaDirector
+from app.dao.model.director import SchemaDirector
 
 
 from flask_restx import Resource, Namespace

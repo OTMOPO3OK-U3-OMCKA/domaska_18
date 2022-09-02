@@ -1,7 +1,7 @@
 /.idea
 dao/__pycache__
 helpers/__pycache__
-views_movie/__pycache__
+app/__pycache__
 .DS_Store
 __pycache__
 /venv/

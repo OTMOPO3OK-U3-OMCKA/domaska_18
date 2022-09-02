@@ -1,4 +1,4 @@
-from views_movie.dao.model.genre import SchemaGenre
+from app.dao.model.genre import SchemaGenre
 
 
 from flask_restx import Resource, Namespace
